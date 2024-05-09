@@ -10,7 +10,7 @@ import FUNCOES_APK as fun
 def tela(inp_janela):
     inp_janela.title("Where Register Lances (WRL)")
     inp_janela.configure(background= '#9BCD9B')
-    inp_janela.geometry("1280x700")
+    inp_janela.geometry("1280x800")
     inp_janela.resizable(False, False) #se quiser impedir que amplie ou diminua a tela, altere para False
     # janela.maxsize(width=1920, height=1080) #limite máximo da tela
     inp_janela.minsize(width=700, height=450) #limite minimo da tela
@@ -26,6 +26,7 @@ def frames_da_tela(inp_janela):
                             bg= '#B4FF9A',
                             highlightbackground= '#668B8B')
         frame_2.place(relx=0.5, rely=0.02,relwidth=0.49, relheight=0.96)
+        
         return frame_1, frame_2
 
 
@@ -57,7 +58,14 @@ def componentes_frame1(inp_frame):
     label_furos.place(relx=0.03, rely=0.5)
 
     input_furos = tk.Entry(inp_frame)
-    input_furos.place(relx=0.18, rely=0.5, relwidth=0.78, relheight=0.05)
+    input_furos.place(relx=0.18, rely=0.5, relwidth=0.27, relheight=0.05)
+    
+    # {=======================TIPO=========================}
+    label_furos = fun.CRIAR_LABEL(inp_frame, "Tipo: ", '#B4FF9A', "#1C1C1C", 'arial', '20', 'bold')
+    label_furos.place(relx=0.47, rely=0.5)
+
+    input_furos = tk.Entry(inp_frame)
+    input_furos.place(relx=0.6, rely=0.5, relwidth=0.35, relheight=0.05)
 
     # {=======================ID=========================}
     label_ID = fun.CRIAR_LABEL(inp_frame, "ID: ", '#B4FF9A', "#1C1C1C", 'arial', '20', 'bold')

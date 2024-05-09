@@ -18,40 +18,40 @@ from tkinter import messagebox
 # from ultralytics import YOLO
 # from skimage.measure import regionprops
 
-janela2 = tk.Tk()
-video = None
+# inp_janela = tk.Tk()
+# video = None
 
 
-def tela(): # {=======================Configuração de tela=========================}
-    janela2.title("Where Register Lances (WRL)")
-    janela2.configure(background= '#9BCD9B')
-    janela2.geometry("1600x900")
-    janela2.resizable(True, True) #se quiser impedir que amplie ou diminua a tela, altere para False
-    # janela2.maxsize(width=1920, height=1080) #limite máximo da tela
-    janela2.minsize(width=700, height=450) #limite minimo da tela
+def tela(inp_janela): # {=======================Configuração de tela=========================}
+    inp_janela.title("Where Register Lances (WRL)")
+    inp_janela.configure(background= '#9BCD9B')
+    inp_janela.geometry("1600x900")
+    inp_janela.resizable(True, True) #se quiser impedir que amplie ou diminua a tela, altere para False
+    # inp_janela.maxsize(width=1920, height=1080) #limite máximo da tela
+    inp_janela.minsize(width=700, height=450) #limite minimo da tela
 
-def frame_1():
+def frames_da_tela(inp_janela):
+    global frame_um, frame_dois
     # {=======================Frame da Direita=========================}
-    frame_um = tk.Frame(janela2, bd=2,
+    frame_um = tk.Frame(inp_janela, bd=2,
                             bg= '#B4EEB4',
                             highlightbackground= '#668B8B', 
                             highlightthickness=1)
     frame_um.place(relx=0.72, rely=0.02,relwidth=0.27, relheight=0.96)
-    return frame_um
 
-def frame_2():
     # {=======================Frame da Esquerda=========================}
-    frame_dois = tk.Frame(janela2, bd=2,
+    frame_dois = tk.Frame(inp_janela, bd=2,
                             bg= '#B4EEB4',
                             highlightbackground= '#668B8B', 
                             highlightthickness=1)
     frame_dois.place(relx=0.01, rely=0.02,relwidth=0.7, relheight=0.96)
-    return frame_dois
+    
+    return frame_um, frame_dois
 
 
-def componentes_frame1():
+def componentes_frame1(inp_frame):
     # {=======================Botão Voltar=========================}
-    btvoltar_pg2 = tk.Button(frame_1(),
+    btvoltar_pg2 = tk.Button(inp_frame,
                             text='Voltar',
                             relief = "raised",
                             cursor = "hand2",
@@ -72,7 +72,7 @@ def componentes_frame1():
     # image_btfoto_pg2 = tk.PhotoImage(file = "fotoclick.png")
     # image_btfoto_pg2 = image_btfoto_pg2.subsample(1, 2)
 
-    btfoto_pg2 = tk.Button(frame_1(),
+    btfoto_pg2 = tk.Button(inp_frame,
                                 text='Click',
                                 relief = "ridge",
                                 cursor = "circle",
@@ -173,13 +173,17 @@ def componentes_frame1():
         
      
     
-def inicio():
-    tela()
-    # frames_da_tela()
-    componentes_frame1()
+def aba_camera(inp_janela):
+    janela_tres = tk.Toplevel()
+    tela(janela_tres)
+    frames_da_tela(janela_tres)
+    componentes_frame1(frame_um)
     # componentes_frame2()
-    janela2.mainloop()
+    janela_tres.transient(inp_janela)
+    janela_tres.focus_force() #era pra janela ser o foco
+    janela_tres.janela_dois.grab_set()
+    
 
 print("\n\n", color.Fore.GREEN + "Iniciando o código - Tela da câmera" + color.Style.RESET_ALL)
-inicio()
+
 print(color.Fore.RED + "Finalizando o código - Tela da câmera" + color.Style.RESET_ALL, "\n")

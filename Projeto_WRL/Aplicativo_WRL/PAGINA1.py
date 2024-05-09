@@ -4,7 +4,8 @@ import colorama as color
 from tkinter import ttk
 from customtkinter import *
 from PIL import Image, ImageTk
-from ABA_CADASTRO import aba_cadastro
+# from ABA_CADASTRO import aba_cadastro
+from APK2 import aba_camera
 import FUNCOES_APK as fun
 # from APK2 import inicio
 
@@ -28,6 +29,9 @@ class APK():
         
     def abinha(self):
         return (aba_cadastro(self.janela_menu))
+    
+    def abinha2(self):
+        return (aba_camera(self.janela_menu))
     
     # def camera(self):
     #     return (inicio(self))
@@ -58,18 +62,18 @@ class APK():
         self.bt_visualizar_site.place(relx=0.5, rely=0.31, relwidth=0.4, relheight=0.2)
         
         # {=======================Botão Iniciar Inspecção=========================}
-        self.bt_iniciar_camera = fun.CRIAR_BOTAO(self.frame_1,'Iniciar Inspecção','#71C55B','#005200',4,'32','bold',"circle")
+        self.bt_iniciar_camera = fun.CRIAR_BOTAO(self.frame_1,'Iniciar Inspecção','#71C55B','#005200',4,'32','bold',"circle", self.abinha2)
         self.bt_iniciar_camera.place(relx=0.5, rely=0.56, relwidth=0.4, relheight=0.35)
 
-        # {=======================Imagem IFES=========================}
-        self.img1_pg1 = tk.PhotoImage(file = 'ifes.png')
-        self.img1_pg1 = self.img1_pg1.subsample(5, 5)
+        # # {=======================Imagem IFES=========================}
+        # self.img1_pg1 = tk.PhotoImage(file = 'ifes.png')
+        # self.img1_pg1 = self.img1_pg1.subsample(5, 5)
 
-        self.fotoimg1_pg1 = tk.Label(self.frame_1,
-                                      bg= '#B4FF9A',
-                                      bd =0,
-                                      image = self.img1_pg1)
-        self.fotoimg1_pg1.place(relx=0.1, rely=0.23, anchor=CENTER)
+        # self.fotoimg1_pg1 = tk.Label(self.frame_1,
+        #                               bg= '#B4FF9A',
+        #                               bd =0,
+        #                               image = self.img1_pg1)
+        # self.fotoimg1_pg1.place(relx=0.1, rely=0.23, anchor=CENTER)
 
 print("\n\n", color.Fore.GREEN + "Iniciando o código - Tela do Menu" + color.Style.RESET_ALL)
 APK() 

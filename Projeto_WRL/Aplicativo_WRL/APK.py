@@ -11,10 +11,10 @@ Grupo, SIte e BOF. Sendo assim, nesta aba, o Grupo, site e bof estão com seu ID
 Registros estarão vindo do banco de dados.
 """
 janela = tk.Tk()
-
+pasta = r'C:\Users\20221CECA0402\Documents'
 class Tabela_DADOS_EMPRESA: # {=======================Comando para o Banco de Dados=========================}
     def conecta_bd(self):
-            self.conn = sql.connect(r"C:\Users\20221CECA0402\Documents\Projeto_WRL\REGISTROS_WRL.db")
+            self.conn = sql.connect(r"C:\Users\20221CECA0402\Documents\Projeto_WRL\BD_WRL\REGISTROS_WRL.db")
             self.cursor = self.conn.cursor(); print("Conectando ao banco de dados\n")
     
     def desconecta_bd(self):
@@ -37,7 +37,7 @@ class Tabela_DADOS_EMPRESA: # {=======================Comando para o Banco de Da
 
 class Tabela_REGISTROS_MEDICOES():
     def conecta_bd(self):
-            self.conn = sql.connect(r"C:\Users\20221CECA0402\Documents\Projeto_WRL\REGISTROS_WRL.db")
+            self.conn = sql.connect(fr"{pasta}\Projeto_WRL\REGISTROS_WRL.db")
             self.cursor = self.conn.cursor(); print("Conectando ao banco de dados\n")
     
     def desconecta_bd(self):
@@ -51,15 +51,16 @@ class Tabela_REGISTROS_MEDICOES():
         self.dados2 = self.cursor.fetchone()
         self.desconecta_bd()
         
-        self.registro_foto = self.dados2[2]
-        self.data_foto = self.dados2[3]
-        self.hora_foto = self.dados2[4]
-        self.medidas_foto = self.dados2[5:]
+        self.num_regisro = self.dados2[0]
+        self.registro_foto = self.dados2[3]
+        self.data_foto = self.dados2[4]
+        self.hora_foto = self.dados2[5]
+        self.medidas_foto = self.dados2[6:]
         # self.dados2_filtrados = [resultado[2:] for resultado in self.dados2]
     
     def imagens(self):  # {=========Informações para imagens(FRAME 2)=========}
-        self.endereco_pastafotos = r"C:\Users\20221CECA0402\Documents\Projeto_WRL\Aplicativo_WRL\fotos"
-        self.endereco_pastaguias = r"C:\Users\20221CECA0402\Documents\Projeto_WRL\Aplicativo_WRL\guias"
+        self.endereco_pastafotos = fr"{pasta}\Projeto_WRL\Aplicativo_WRL\fotos"
+        self.endereco_pastaguias = fr"{pasta}\Projeto_WRL\Aplicativo_WRL\guias"
         self.local_image = '\\'+ self.registro_foto
         #self.local_image = '\\'+ self.dados2[0][2] #+'.png'   (esta linha caso for usar '.fetchall' no 'def tabela' assim fazendo uma tupla e não uma lista)
             
