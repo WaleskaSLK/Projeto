@@ -231,25 +231,18 @@
 # B5.pack()
 # top.mainloop()
 
-from tkinter import *
-import tkinter.ttk as ttk
+from customtkinter import *
+from PIL import Image
 
-root = Tk()
 
-tree = ttk.Treeview(root)
-tree.pack()
+jnl = CTk()
+jnl.geometry("600x600")
 
-style = ttk.Style()
-style.configure("Treeview.Heading", font=(None, 100))
+set_appearance_mode("dark")
+img = Image.open("click.png")
 
-tree["columns"] = ("one", "two", "three")
-tree.column("one", width=150)
-tree.column("two", width=150)
-tree.column("three", width=150)
-tree.heading("one", text="Naar")
-tree.heading("two", text="Spoor")
-tree.heading("three", text="Vetrektijd")
-tree['show'] = 'headings'
+bot = CTkButton(master=jnl, text ="Clica ae", corner_radius=30,fg_color='#EE9572',hover_color = '#FFA07A', border_color="#8B5742", border_width=3, image = CTkImage(dark_image =img))
 
-root.mainloop()
+bot.place(relx=0.5,rely=0.5,anchor="center")
+jnl.mainloop()
 

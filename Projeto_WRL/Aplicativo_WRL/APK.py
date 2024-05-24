@@ -1,8 +1,8 @@
-from tkinter import ttk
+from tkinter import ttk, CENTER
 import tkinter as tk
 import sqlite3 as sql
 import colorama as color
-from customtkinter import *
+import customtkinter
 from PIL import Image, ImageTk
 
 """Linha de raciocinio:
@@ -37,8 +37,8 @@ class Tabela_DADOS_EMPRESA: # {=======================Comando para o Banco de Da
 
 class Tabela_REGISTROS_MEDICOES():
     def conecta_bd(self):
-            self.conn = sql.connect(fr"{pasta}\Projeto_WRL\REGISTROS_WRL.db")
-            self.cursor = self.conn.cursor(); print("Conectando ao banco de dados\n")
+        self.conn = sql.connect(fr"{pasta}\Projeto_WRL\BD_WRL.db")
+        self.cursor = self.conn.cursor(); print("Conectando ao banco de dados\n")
     
     def desconecta_bd(self):
         self.conn.close(); print("Desconectando do banco de dados")
@@ -51,22 +51,23 @@ class Tabela_REGISTROS_MEDICOES():
         self.dados2 = self.cursor.fetchone()
         self.desconecta_bd()
         
-        self.num_regisro = self.dados2[0]
-        self.registro_foto = self.dados2[3]
-        self.data_foto = self.dados2[4]
-        self.hora_foto = self.dados2[5]
-        self.medidas_foto = self.dados2[6:]
+        self.usuario = self.dados2[2]
+        self.vida = self.dados2[3]
+        self.registro_foto = self.dados2[6]
+        self.data_foto = self.dados2[7]
+        self.hora_foto = self.dados2[8]
+        self.medidas_foto = self.dados2[9:]
         # self.dados2_filtrados = [resultado[2:] for resultado in self.dados2]
     
     def imagens(self):  # {=========Informações para imagens(FRAME 2)=========}
-        self.endereco_pastafotos = fr"{pasta}\Projeto_WRL\Aplicativo_WRL\fotos"
+        self.endereco_pastafotos = fr"{pasta}\Projeto_WRL\Aplicativo_WRL\fotos_app"
         self.endereco_pastaguias = fr"{pasta}\Projeto_WRL\Aplicativo_WRL\guias"
         self.local_image = '\\'+ self.registro_foto
         #self.local_image = '\\'+ self.dados2[0][2] #+'.png'   (esta linha caso for usar '.fetchall' no 'def tabela' assim fazendo uma tupla e não uma lista)
             
         self.arquivofoto = self.endereco_pastafotos +'\\' +self.local_image
         self.arquivoguia = self.endereco_pastaguias +'\\' +self.local_image
-        
+        print(self.arquivofoto)
 class APK(Tabela_DADOS_EMPRESA,Tabela_REGISTROS_MEDICOES):
     def __init__(self):
         self.janela = janela
@@ -291,5 +292,6 @@ class APK(Tabela_DADOS_EMPRESA,Tabela_REGISTROS_MEDICOES):
         self.titulo2_pg1.place(relx=0.01, rely=0.94)
 
 print("\n\n", color.Fore.GREEN + "Iniciando o código - Dados do bico" + color.Style.RESET_ALL)
+
 APK() 
 print(color.Fore.RED + "Finalizando o código - Dados do bico" + color.Style.RESET_ALL, "\n")

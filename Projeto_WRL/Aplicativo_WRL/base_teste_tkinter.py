@@ -1,17 +1,16 @@
-from tkinter import ttk
-from tkinter import messagebox
-import tkinter as tk
-import sqlite3 as sql
-import colorama as color
 
+import webbrowser
+import colorama as color
+import sqlite3 as sql
+import tkinter as tk, tkinter.messagebox, tkinter.ttk as ttk
+
+from tkcalendar import Calendar, DateEntry
 from reportlab.pdfgen import canvas
 from reportlab.lib.pagesizes import letter, A4
 from reportlab.pdfbase import pdfmetrics
 from reportlab.pdfbase.ttfonts import TTFont
 from reportlab.platypus import SimpleDocTemplate, Image
-import webbrowser
 from PIL import ImageTk , Image
-from tkcalendar import Calendar, DateEntry
 
 aba = tk.Tk()
 
@@ -64,7 +63,7 @@ class Funcs():
         self.input_nome.delete(0, tk.END)
         self.input_cidade.delete(0, tk.END)
     def conecta_bd(self):
-        self.conn = sql.connect("C:\\Users\\20211MPECA0020\Documents\\Projeto\\clientes.db")
+        self.conn = sql.connect(r"C:\Users\20221CECA0402\Documents\Projeto_WRL\Aplicativo_WRL\clientes.db")
         self.cursor = self.conn.cursor(); print("Conectando ao banco de dados")
     def desconecta_bd(self):
         self.conn.close(); print("Desconectando do banco de dados")
@@ -217,11 +216,11 @@ class Application(Funcs, Relatorios,Validadores):
         # self.balao_buscar.bind_widget(self.bt_buscar, balloonmsg = "Digite no campo Nome o cliente que deseja pesquisar")
 
         ### Criação do botao novo
-        self.btnovo = tk.PhotoImage(file = r"C:\Users\20211MPECA0020\Documents\Projeto\Aplicativo\botaonovo.gif")
-        self.btnovo = self.btnovo.subsample(2, 2)
+        # self.btnovo = tk.PhotoImage(file = r"C:\Users\20211MPECA0020\Documents\Projeto\Aplicativo\botaonovo.gif")
+        # self.btnovo = self.btnovo.subsample(2, 2)
 
-        self.bt_novo = tk.Button(self.frame_1, bd =0, image = self.btnovo, command= self.add_cliente)
-        self.bt_novo.place(relx=0.5, rely=0.08, width=60, height=40)
+        # self.bt_novo = tk.Button(self.frame_1, bd =0, image = self.btnovo, command= self.add_cliente)
+        # self.bt_novo.place(relx=0.5, rely=0.08, width=60, height=40)
 
         ### Criação do botao alterar
         self.bt_alterar = tk.Button(self.frame_1, text='Alterar' , bg = '#107db2', fg = 'white', command=self.altera_cliente)
@@ -259,6 +258,13 @@ class Application(Funcs, Relatorios,Validadores):
 
         self.input_cidade = tk.Entry(self.frame_1)
         self.input_cidade.place(relx=0.32, rely=0.72, relwidth=0.5, relheight=0.14)
+        ### drop down button
+        self.Tipvar = tk.StringVar(self.aba)
+        self.TipV = ("Solteiro(a)", "Casado(a)", "Viuvo(a)")
+        self.Tipvar.set("Solteiro(a)")
+        self.popupMenu = tk.OptionMenu(self.aba, self.Tipvar,*self.TipV)
+        self.popupMenu.place(relx=0.1, rely=0.1, relwidth=0.4, relheight=0.3)
+        self.estado_civil = self.Tipvar.get
 
         self.bt_calendario = tk.Button(self.frame_1, text= "Data", command= self.calendario)
         self.bt_calendario.place(relx=0.5 ,rely=0.02)
